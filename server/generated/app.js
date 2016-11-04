@@ -100,7 +100,7 @@ module.exports =
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        _react2.default.createElement(_messageList2.default, { message: this.props.messages }),
+	        _react2.default.createElement(_messageList2.default, { messages: this.props.messages }),
 	        _react2.default.createElement(_messageEntryBox2.default, {
 	          value: this.props.currentMessage,
 	          onChange: this.props.updateMessage,
@@ -114,7 +114,7 @@ module.exports =
 
 	function mapStateToProps(state) {
 	  return {
-	    messages: state.messsages,
+	    messages: state.messages,
 	    currentMessage: state.currentMessage
 	  };
 	}
@@ -191,10 +191,10 @@ module.exports =
 	      return _react2.default.createElement(
 	        'ol',
 	        { className: 'message-list' },
-	        this.props.messages.map(function (message, index) {
+	        this.props.messages.map(function (message) {
 	          return _react2.default.createElement(
 	            'li',
-	            { key: 'message-' + index },
+	            { key: 'message-' + message.id },
 	            message.text
 	          );
 	        })
@@ -248,9 +248,9 @@ module.exports =
 	        { className: 'message-entry-box' },
 	        _react2.default.createElement('textarea', {
 	          name: 'message',
-	          value: 'this.props.value',
-	          onChange: '{this.handleChange.bind(this)}',
-	          onKeyPress: '{this.handleKeyPress.bind(this)}' })
+	          value: this.props.value,
+	          onChange: this.handleChange.bind(this),
+	          onKeyPress: this.handleKeyPress.bind(this) })
 	      );
 	    }
 	  }, {
@@ -261,6 +261,7 @@ module.exports =
 	  }, {
 	    key: 'handleKeyPress',
 	    value: function handleKeyPress(ev) {
+	      console.log(ev.which);
 	      if (ev.which === 13) {
 	        this.props.onSubmit();
 	        ev.preventDefault();

@@ -1,12 +1,12 @@
-import React, {Component} from 'react'
+import React, {Component} from 'react';
 
 class MessageList extends Component {
   render() {
     return (
       <ol className='message-list'>
-        {this.props.messages.map((message, index) => {
+        {this.props.messages.map(message => {
           return (
-            <li key={`message-${index}`}>
+            <li key={`message-${message.id}`}>
               {message.text}
             </li>
           );

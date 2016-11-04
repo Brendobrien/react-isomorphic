@@ -9,11 +9,15 @@ import App from './generated/app'
 
 const app = express();
 
-// view templates
-app.engine('handlebars', handlebars({defaultLayout: 'main'}));
+// View templates
+app.engine('handlebars', handlebars({
+  defaultLayout: 'main',
+  layoutsDir: path.resolve(__dirname, 'views/layouts')
+}));
 app.set('view engine', 'handlebars');
+app.set('views', path.resolve(__dirname, 'views'));
 
-// static assets
+// Static assets
 app.use(express.static(path.resolve(__dirname, '../dist')));
 
 // routes
@@ -35,4 +39,5 @@ app.get('/', (request, response) => {
   });
 })
 
-app.listen(3000, () => console.log('Server running!'));
+const port = 3000
+app.listen(port, () => console.log('Server running on port '+port+'!'));
